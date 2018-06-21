@@ -5,17 +5,24 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.lqk.libmyplayer.JniTest;
+import com.lqk.libmyplayer.player.LqkPlayer;
 
 public class MainActivity extends AppCompatActivity {
 
-    JniTest jniTest;
+//    JniTest jniTest;
+    LqkPlayer lqkPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        jniTest = new JniTest();
-        jniTest.testJni();
+//        jniTest = new JniTest();
+//        jniTest.testJni();
+        lqkPlayer = new LqkPlayer();
     }
 
+    void begin(){
+        lqkPlayer.setSource("");
+        lqkPlayer.prepared();
+    }
 }
