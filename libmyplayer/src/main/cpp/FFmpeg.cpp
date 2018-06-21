@@ -93,7 +93,7 @@ void FFmpeg::start() {
         return;
     }
     AVPacket pkt;
-    //AVFrame *frame = av_frame_alloc();
+//    AVFrame *frame = av_frame_alloc();
 
     int count = 0;
     int res = 0;
@@ -104,26 +104,11 @@ void FFmpeg::start() {
             if (pkt.stream_index == pAudio->audioIndex)
             {
                 LOGD("播放当前帧 %d", count++);
-//                if ((res = avcodec_send_packet(pCodecCxt, &pkt)) < 0) {
-//                    LOGD("Error while sending a packet to the decoder");
-//                    break;
-//                }
-//
-//                while (res >= 0) {
-//                    res = avcodec_receive_frame(pCodecCxt, frame);
-//                    if (res == AVERROR(EAGAIN) || res == AVERROR_EOF) {
-//                        break;
-//                    } else if (res < 0) {
-//                        LOGD("Error while receiving a frame from the decoder");
-//                        ;
-//                    }
-//
-//                    av_frame_unref(frame);
-//                }
             }
 
         } else
         {
+            av_packet_unref(&pkt);
             break;
         }
 
@@ -131,5 +116,8 @@ void FFmpeg::start() {
 
     }
 
+//    av_packet_free(pkt);
+
+    LOGD("start finished");
 
 }
