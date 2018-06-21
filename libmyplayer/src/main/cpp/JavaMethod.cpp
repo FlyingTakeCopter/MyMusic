@@ -30,13 +30,17 @@ JavaMethod::~JavaMethod() {
 }
 
 void JavaMethod::onCallPrepared(int threadType) {
+    LOGD("onCallPrepared in from native");
+
     if (threadType == MAIN_THREAD)
     {
         jenv->CallVoidMethod(jobj, jmid_prepared);
+
     } else if (threadType == CHILD_THREAD)
     {
+        // 注意传参错误，即使有错也不会失败
         JNIEnv*env;
-        if (jvm->AttachCurrentThread((JNIEnv **) env, 0) != JNI_OK)
+        if (jvm->AttachCurrentThread(&env, 0) != JNI_OK)
         {
             if (LOG_DEBUG)
             {
@@ -49,4 +53,6 @@ void JavaMethod::onCallPrepared(int threadType) {
 
         jvm->DetachCurrentThread();
     }
+    LOGD("onCallPrepared out from native");
+
 }

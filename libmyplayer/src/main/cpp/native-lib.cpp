@@ -26,7 +26,7 @@ jint JNICALL JNI_OnLoad(JavaVM*vm, void* res)
     jint result = -1;
     javaVm = vm;
     JNIEnv*env;
-    if (vm->GetEnv((void **) env, JNI_VERSION_1_4) != JNI_OK)
+    if (vm->GetEnv((void **) &env, JNI_VERSION_1_4) != JNI_OK)
     {
         return result;
     }
@@ -41,22 +41,27 @@ Java_com_lqk_libmyplayer_JniTest_testJni(JNIEnv *env, jobject instance) {
 }
 
 
-
-
-
-
-
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_lqk_libmyplayer_player_LqkPlayer_n_1prepared(JNIEnv *env, jobject instance,
                                                       jstring source_) {
     const char *source = env->GetStringUTFChars(source_, 0);
 
+    //env->GetJavaVM(&javaVm);
+    if (!javaVm)
+    {
+        LOGD("javaVm is null");
+        return;
+    }
+
     if (javaMethod == NULL)
     {
         javaMethod = new JavaMethod(javaVm, env, instance);
     }
+//    javaMethod->onCallPrepared(0);
+//    return;
 
+    LOGD("source is %s", source);
     if (ffmpeg == NULL)
     {
         ffmpeg = new FFmpeg(javaMethod, source);
@@ -64,5 +69,21 @@ Java_com_lqk_libmyplayer_player_LqkPlayer_n_1prepared(JNIEnv *env, jobject insta
 
     ffmpeg->prepared();
 
-    env->ReleaseStringUTFChars(source_, source);
+    //此处释放会导致ffmpeg url 乱码
+    //env->ReleaseStringUTFChars(source_, source);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_lqk_libmyplayer_player_LqkPlayer_n_1start(JNIEnv *env, jobject instance) {
+
+    // TODO
+    if (ffmpeg != NULL)
+    {
+        ffmpeg->start();
+    }
+}
+
+
+
+

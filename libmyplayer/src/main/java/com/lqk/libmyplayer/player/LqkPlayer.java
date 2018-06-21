@@ -31,13 +31,40 @@ public class LqkPlayer {
             MyLog.d("source is empty");
             return;
         }
+        MyLog.d(source);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                n_prepared(source);
+            }
+        }).start();
+    }
+
+    public void start(){
+        if (TextUtils.isEmpty(source)){
+            MyLog.d("source is empty");
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                n_start();
+            }
+        }).start();
     }
 
     public void onCallPrepared(){
+        MyLog.d("onCallPrepared in");
+
         if (lqkOnPreparedListener != null){
             lqkOnPreparedListener.onPrepared();
+        }else{
+            MyLog.d("lqkOnPreparedListener is NULL");
         }
     }
 
     public native void n_prepared(String source);
+
+    public native void n_start();
 }

@@ -24,7 +24,10 @@ set_target_properties(swresample PROPERTIES IMPORTED_LOCATION ${FF}/libswresampl
 
 add_library( native-lib SHARED
 
-             src/main/cpp/native-lib.cpp )
+             src/main/cpp/native-lib.cpp
+              src/main/cpp/FFmpeg.cpp
+              src/main/cpp/JavaMethod.cpp
+              src/main/cpp/Audio.cpp)
 
 # 链接avcodec到native-lib库中，否则在native-lib.cpp中调用函数会报链接无效
 target_link_libraries( # Specifies the target library.

@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyMusic.iml" filepath="$PROJECT_DIR$/MyMusic.iml" />
+      <module fileurl="file://C:\workspace_ffmpeg\MyMusic\MyMusic.iml" filepath="C:\workspace_ffmpeg\MyMusic\MyMusic.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\workspace_ffmpeg\MyMusic\app\app.iml" filepath="C:\workspace_ffmpeg\MyMusic\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libmyplayer/libmyplayer.iml" filepath="$PROJECT_DIR$/libmyplayer/libmyplayer.iml" />
+      <module fileurl="file://C:\workspace_ffmpeg\MyMusic\libmyplayer\libmyplayer.iml" filepath="C:\workspace_ffmpeg\MyMusic\libmyplayer\libmyplayer.iml" />
     </modules>
   </component>
 </project>

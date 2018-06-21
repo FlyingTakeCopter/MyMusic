@@ -8,12 +8,14 @@
 
 #include <sys/types.h>
 #include "JavaMethod.h"
+#include "Audio.h"
 #include <pthread.h>
 
 extern "C"
 {
 #include <libavcodec/avcodec.h>
 #include "libavformat/avformat.h"
+#include "libavutil/error.h"
 };
 
 class FFmpeg {
@@ -22,6 +24,10 @@ public:
     const char* url = NULL;
     pthread_t decodeThread;
     AVFormatContext*pFormatCxt = NULL;
+    AVCodec*pCodec= NULL;
+    AVCodecContext*pCodecCxt = NULL;
+
+    Audio* pAudio = NULL;
 
     FFmpeg(JavaMethod*jmid, const char* path);
     ~FFmpeg();
@@ -29,6 +35,8 @@ public:
     void prepared();
 
     void decode();
+
+    void start();
 };
 
 

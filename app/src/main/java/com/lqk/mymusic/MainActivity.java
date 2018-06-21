@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.lqk.libmyplayer.JniTest;
+import com.lqk.libmyplayer.listener.LqkOnPreparedListener;
+import com.lqk.libmyplayer.log.MyLog;
 import com.lqk.libmyplayer.player.LqkPlayer;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,10 +21,18 @@ public class MainActivity extends AppCompatActivity {
 //        jniTest = new JniTest();
 //        jniTest.testJni();
         lqkPlayer = new LqkPlayer();
+        lqkPlayer.setLqkOnPreparedListener(new LqkOnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                MyLog.d("prepared finished");
+                lqkPlayer.n_start();
+            }
+        });
+        begin();
     }
 
     void begin(){
-        lqkPlayer.setSource("");
+        lqkPlayer.setSource("sdcard/ffmpegtest/audio.mp3");
         lqkPlayer.prepared();
     }
 }
